@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: TicketChain
+
+  datasource:
+    url: "jdbc:mysql://localhost:3306/ticket_chain"
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
