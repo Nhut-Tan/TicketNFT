@@ -14,30 +14,16 @@ import com.example.TicketChain.repository.WalletRepository;
 public class WalletService {
     @Autowired
     private WalletRepository walletRepository;
-
-    // public Wallet findOrCreateWallet(String walletId) {
-    // Optional<Wallet> existingWallet = walletRepository.findByWalletId(walletId);
-    // if (existingWallet.isPresent()) {
-    // return existingWallet.get(); // Trả về ví đã tồn tại
-    // }
-    // Wallet newWallet = new Wallet();
-    // newWallet.setWalletId(walletId);
-    // newWallet.setRole(Role.CUSTOMER);
-    // newWallet.setCreated_at(new Timestamp(System.currentTimeMillis()));
-    // return walletRepository.save(newWallet);
-    // }
-    public String findOrCreateWallet(String address) throws IllegalArgumentException {
-
-        // Kiểm tra và lưu ví
+    public Wallet findOrCreateWallet(String address) throws IllegalArgumentException {
         Optional<Wallet> existingWallet = walletRepository.findByWalletId(address);
         if (existingWallet.isEmpty()) {
             Wallet newWallet = new Wallet();
             newWallet.setWalletId(address);
             newWallet.setRole(Role.CUSTOMER);
             newWallet.setCreated_at(new Timestamp(System.currentTimeMillis()));
-            walletRepository.save(newWallet);
+            return walletRepository.save(newWallet);
         }
-
-        return address;
+        return existingWallet.get();
     }
+
 }

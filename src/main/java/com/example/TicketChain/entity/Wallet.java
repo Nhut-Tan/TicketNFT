@@ -7,6 +7,8 @@ import com.example.TicketChain.core.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -19,6 +21,7 @@ public class Wallet {
     private String walletId;
     private String name;
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
     private Timestamp created_at;
     @OneToMany(mappedBy = "wallet")

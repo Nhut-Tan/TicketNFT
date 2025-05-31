@@ -22,36 +22,16 @@ import jakarta.servlet.http.HttpSession;
 public class WalletController {
     @Autowired
     private WalletService walletService;
-
-    // @PostMapping("/connect-wallet")
-    // public ResponseEntity<?> connectWallet(@RequestBody ConnectWalletRequest
-    // request, HttpSession session) {
-    // String walletId = request.getWallet_id();
-
-    // if (walletId == null || walletId.isEmpty()) {
-    // return ResponseEntity.badRequest().body(Map.of("message", "walletId is
-    // required"));
-    // }
-
-    // Wallet wallet = walletService.findOrCreateWallet(walletId);
-
-    // session.setAttribute("walletId", walletId);
-
-    // return ResponseEntity.ok(Map.of(
-    // "message", "Wallet connected",
-    // "wallet_address", wallet.getWalletId(),
-    // "sessionId", session.getId()));
-    // }
     @PostMapping("/connect-wallet")
-    public ResponseEntity<?> connectWallet(@RequestBody ConnectWalletRequest request) {
+    public ResponseEntity<WalletResponse> connectWallet(@RequestBody ConnectWalletRequest request) {
         try {
-            String address = walletService.findOrCreateWallet(request.getWalletId());
-            String token = JwtUtil.generateToken(address);
-            return ResponseEntity.ok(new WalletResponse(address, token, "Wallet connected successfully"));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(new WalletResponse(null, null, e.getMessage()));
+            Wallet address = walletService.findOrCreateWallet(request.getWalletId());
+            String token = JwtUtil.generateToken(address.getWalletId(), address.getRole());
+            return ResponseEntity.ok(new WalletResponse(address.getWalletId(), token, address.getRole().name(),
+                    "Wallet connected successfully"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new WalletResponse(null, null, "An unexpected error occurred"));
+            return ResponseEntity.badRequest()
+                    .body(new WalletResponse(null, null, null, "Lỗi:" + e.getMessage()));
         }
     }
 

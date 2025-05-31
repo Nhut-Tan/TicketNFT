@@ -3,11 +3,13 @@ package com.example.TicketChain.dto.response;
 public class WalletResponse {
     private String address;
     private String token;
+    private String role;
     private String message;
 
-    public WalletResponse(String address, String token, String message) {
+    public WalletResponse(String address, String token,String role, String message) {
         this.address = address;
         this.token = token;
+        this.role = role;
         this.message = message;
     }
 
@@ -33,6 +35,14 @@ public class WalletResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

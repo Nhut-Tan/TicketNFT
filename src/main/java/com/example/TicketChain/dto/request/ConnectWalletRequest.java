@@ -1,7 +1,5 @@
 package com.example.TicketChain.dto.request;
 
-
-
 public class ConnectWalletRequest {
     private String walletId;
 
@@ -12,7 +10,5 @@ public class ConnectWalletRequest {
     public void setWalletId(String walletId) {
         this.walletId = walletId;
     }
-  
-  
-    
+
 }
