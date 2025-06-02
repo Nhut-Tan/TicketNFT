@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.example.TicketChain.core.StringListConverter;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -22,6 +26,11 @@ public class TicketType {
     private Integer amount;
     private Integer remaining_amount;
     private String metadataURI;
+
+    @Convert(converter = StringListConverter.class)
+    @Column(columnDefinition = "json")
+    private List<String> benefits;
+
     @ManyToOne
     @JoinColumn(name = "event_id")
     private Events event;
@@ -75,6 +84,14 @@ public class TicketType {
 
     public void setMetadataURI(String metadataURI) {
         this.metadataURI = metadataURI;
+    }
+
+    public List<String> getBenefits() {
+        return benefits;
+    }
+
+    public void setBenefits(List<String> benefits) {
+        this.benefits = benefits;
     }
 
     public Events getEvent() {

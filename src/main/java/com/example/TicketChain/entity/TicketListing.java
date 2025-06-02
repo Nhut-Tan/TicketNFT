@@ -1,6 +1,7 @@
 package com.example.TicketChain.entity;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import com.example.TicketChain.core.TicketListingStatus;
@@ -16,7 +17,7 @@ import jakarta.persistence.Table;
 @Table(name = "ticket_listing")
 public class TicketListing {
     @Id
-    private Long listing_id;
+    private BigInteger listing_id;
     private String seller_address;
     private BigDecimal price;
     private TicketListingStatus status;
@@ -31,11 +32,11 @@ public class TicketListing {
     @OneToMany(mappedBy = "listing")
     private List<Transactions> transactions;
 
-    public Long getListing_id() {
+    public BigInteger getListing_id() {
         return listing_id;
     }
 
-    public void setListing_id(Long listing_id) {
+    public void setListing_id(BigInteger listing_id) {
         this.listing_id = listing_id;
     }
 

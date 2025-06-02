@@ -16,11 +16,9 @@ public class JwtUtil {
     // Bí mật phải đủ độ dài (ít nhất 256 bit = 32 ký tự ASCII)
     private static final String SECRET = "988e753f868635b2839f912944216875fa0ff1a0e288c533d426ae20cc23cb88c0b767a500555d8334d5b9a246eab56491f710ae96c2806ffd8a853295c08235";
     private static final long EXPIRATION_TIME = 86400000; // 1 ngày
-
-    // Tạo key đúng chuẩn
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
 
-    public static String generateToken(String address,Role role) {
+    public static String generateToken(String address, Role role) {
         return Jwts.builder()
                 .setSubject(address)
                 .claim("role", role.name())

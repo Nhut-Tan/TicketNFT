@@ -1,6 +1,7 @@
 package com.example.TicketChain.entity;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ import jakarta.persistence.Table;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long order_id;
+    private BigInteger order_id;
 
     private BigDecimal total_price;
 
@@ -39,11 +40,11 @@ public class Orders {
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
-    public Long getOrder_id() {
+    public BigInteger getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(Long order_id) {
+    public void setOrder_id(BigInteger order_id) {
         this.order_id = order_id;
     }
 

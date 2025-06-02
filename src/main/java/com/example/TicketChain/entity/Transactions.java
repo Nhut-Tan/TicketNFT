@@ -1,5 +1,6 @@
 package com.example.TicketChain.entity;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
@@ -15,7 +16,7 @@ import jakarta.persistence.Table;
 public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long trans_id;
+    private BigInteger trans_id;
 
     private String tx_hash;
     private String from_address;
@@ -31,11 +32,11 @@ public class Transactions {
     @JoinColumn(name = "listing_id")
     private TicketListing listing;
 
-    public Long getTrans_id() {
+    public BigInteger getTrans_id() {
         return trans_id;
     }
 
-    public void setTrans_id(Long trans_id) {
+    public void setTrans_id(BigInteger trans_id) {
         this.trans_id = trans_id;
     }
 

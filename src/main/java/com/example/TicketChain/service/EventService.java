@@ -2,19 +2,17 @@ package com.example.TicketChain.service;
 
 import org.web3j.utils.Convert;
 import java.math.BigInteger;
-import java.time.Instant;
-import java.time.ZoneId;
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.stereotype.Service;
-import org.web3j.crypto.Credentials;
+
 import org.web3j.model.EventManager;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.tx.gas.DefaultGasProvider;
 
 import com.example.TicketChain.dto.request.CreateEventRequest;
 import com.example.TicketChain.dto.request.TicketTypeDTO;
@@ -24,7 +22,6 @@ import com.example.TicketChain.entity.TicketType;
 import com.example.TicketChain.repository.EventRepository;
 import com.example.TicketChain.repository.OrganizerRepository;
 import com.example.TicketChain.repository.TicketTypeRepository;
-import com.example.TicketChain.config.Web3jConfig;
 import com.example.TicketChain.core.EventStatus;
 
 import jakarta.transaction.Transactional;
@@ -91,13 +88,13 @@ public class EventService {
                 .map(TicketTypeDTO::getMetadataURI)
                 .collect(Collectors.toList());
 
-        // Gọi hàm contract (giả sử eventContract đã load)
+        // Gọi hàm createEvent trong contract 
         TransactionReceipt receipt = eventContract.createEvent(
                 req.getOrganizer().getName(),
                 ticketPrices,
                 ticketQuantities,
                 metadataURIs).send();
-        // extract from event log
+        // Bắt event trả về
         List<EventManager.EventCreatedEventResponse> events = eventContract.getEventCreatedEvents(receipt);
         List<EventManager.TicketTypeCreatedEventResponse> ticketEvents = eventContract
                 .getTicketTypeCreatedEvents(receipt);
@@ -139,6 +136,7 @@ public class EventService {
             type.setAmount(t.getAmount().intValue());
             type.setRemaining_amount(t.getAmount().intValue());
             type.setMetadataURI(t.getMetadataURI());
+            type.setBenefits(t.getBenefits());
             type.setEvent(event);
 
             ticketTypeRepository.save(type);
