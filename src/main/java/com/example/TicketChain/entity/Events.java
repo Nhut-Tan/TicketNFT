@@ -1,10 +1,13 @@
 package com.example.TicketChain.entity;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import com.example.TicketChain.core.EventStatus;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,24 +17,25 @@ import jakarta.persistence.Table;
 @Table(name = "events")
 public class Events {
     @Id
-    private Long event_id;
+    private BigInteger event_id;
     private String event_name;
-
-    @ManyToOne
-    @JoinColumn(name = "organizer_id")
-    private Organizers organizer;
     private String location;
     private String description;
     private String image_url;
     private Timestamp date_start;
     private Timestamp date_end;
+    @Enumerated(EnumType.STRING)
     private EventStatus status;
 
-    public Long getEvent_id() {
+    @ManyToOne
+    @JoinColumn(name = "organizer_id")
+    private Organizers organizer;
+
+    public BigInteger getEvent_id() {
         return event_id;
     }
 
-    public void setEvent_id(Long event_id) {
+    public void setEvent_id(BigInteger event_id) {
         this.event_id = event_id;
     }
 

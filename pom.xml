@@ -95,7 +95,24 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.web3j</groupId>
+				<artifactId>web3j-maven-plugin</artifactId>
+				<version>4.8.7</version>
+				<executions>
+					<execution>
+					<goals>
+						<goal>generate-sources</goal>
+					</goals>
+					<configuration>
+						<abiFile>src/main/resources/contracts/EventManager.json</abiFile>
+						<binFile>src/main/resources/contracts/EventManager.bin</binFile>
+						<outputDir>src/main/java</outputDir>
+						<packageName>com.example.TicketChain.generated</packageName>
+					</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

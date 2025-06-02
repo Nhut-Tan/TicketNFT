@@ -3,6 +3,8 @@ package com.example.TicketChain.entity;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "organizers")
 public class Organizers {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer organizer_id;
     private String name;
     private String logo;

@@ -1,5 +1,6 @@
 package com.example.TicketChain.entity;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import com.example.TicketChain.core.TicketStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,12 +20,13 @@ import jakarta.persistence.Table;
 @Table(name = "tickets")
 public class Tickets {
     @Id
-    private Long ticket_id;
+    private BigInteger ticket_id;
     private String owner_address;
 
     @Column(unique = true)
     private Integer token_id;
 
+    @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
     private Boolean is_listing = false;
@@ -41,11 +45,11 @@ public class Tickets {
     @OneToMany(mappedBy = "ticket")
     private List<Transactions> transactions;
 
-    public Long getTicket_id() {
+    public BigInteger getTicket_id() {
         return ticket_id;
     }
 
-    public void setTicket_id(Long ticket_id) {
+    public void setTicket_id(BigInteger ticket_id) {
         this.ticket_id = ticket_id;
     }
 

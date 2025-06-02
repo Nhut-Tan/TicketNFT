@@ -1,6 +1,6 @@
 package com.example.TicketChain.controller;
 
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import com.example.TicketChain.dto.response.WalletResponse;
 import com.example.TicketChain.entity.Wallet;
 import com.example.TicketChain.service.WalletService;
 
-import jakarta.servlet.http.HttpSession;
+
 
 @RestController
 @RequestMapping("/api")

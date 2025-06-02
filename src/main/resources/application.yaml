@@ -7,3 +7,11 @@ spring:
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+web3j:
+  client-address: https://sepolia.infura.io/v3/3d0b1ec030e3476c9c0da33258249774
+  wallet:
+    private-key: c790a27aa5265da5403bb42b8e9819cf270304f4f10881371e853a55ebba0313
+    address: "0x32Bd162c618Ce4a088A5E42F7E096FC279BFc5D6"
+contract:
+  event-address: "0x1F99Cc3fC0a464E7AAd21C822dcd7C5d6d7B7284"
+  ticket-address: "0x4cC6E3C33B13A54C27dbf2Dd932bc940ad4fd77f"
