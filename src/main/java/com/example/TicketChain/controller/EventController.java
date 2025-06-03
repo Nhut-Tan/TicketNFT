@@ -42,16 +42,6 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEvents());
     }
 
-    // @GetMapping("/events/{id}")
-    // public ResponseEntity<?> getEventDetail(@PathVariable("id") BigInteger id) {
-    // try {
-    // Events event = eventService.getEventById(id);
-    // return ResponseEntity.ok(event);
-    // } catch (RuntimeException e) {
-    // return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error",
-    // e.getMessage()));
-    // }
-    // }
     @GetMapping("/events/{id}")
     public ResponseEntity<EventDetailResponse> getEventDetail(@PathVariable("id") BigInteger eventId) {
         EventDetailResponse event = eventService.getEventDetail(eventId);

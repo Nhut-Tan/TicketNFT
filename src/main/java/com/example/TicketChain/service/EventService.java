@@ -14,8 +14,6 @@ import org.web3j.model.EventManager;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import com.example.TicketChain.dto.request.CreateEventRequest;
-import com.example.TicketChain.dto.request.EventDTO;
-import com.example.TicketChain.dto.request.OrganizerDTO;
 import com.example.TicketChain.dto.request.TicketTypeDTO;
 import com.example.TicketChain.dto.response.EventDetailResponse;
 import com.example.TicketChain.entity.Events;
