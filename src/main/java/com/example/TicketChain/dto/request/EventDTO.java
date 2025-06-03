@@ -7,7 +7,7 @@ public class EventDTO {
     private String location;
     private String description;
     private String image_url;
-    private Timestamp dateStart; // Unix timestamp
+    private Timestamp dateStart; 
     private Timestamp dateEnd;
 
     public String getName() {

@@ -3,7 +3,6 @@ package com.example.TicketChain.service;
 import org.web3j.utils.Convert;
 import java.math.BigInteger;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,10 @@ import org.web3j.model.EventManager;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
 import com.example.TicketChain.dto.request.CreateEventRequest;
+import com.example.TicketChain.dto.request.EventDTO;
+import com.example.TicketChain.dto.request.OrganizerDTO;
 import com.example.TicketChain.dto.request.TicketTypeDTO;
+import com.example.TicketChain.dto.response.EventDetailResponse;
 import com.example.TicketChain.entity.Events;
 import com.example.TicketChain.entity.Organizers;
 import com.example.TicketChain.entity.TicketType;
@@ -60,6 +62,18 @@ public class EventService {
         this.eventContract = eventContract;
     }
 
+    public List<Events> getAllEvents() {
+        return eventRepository.findAll();
+    }
+
+    // public EventDetailResponse getEventDetail(BigInteger eventId) {
+    // return eventRepository.findEventDetailById(eventId);
+    // }
+
+    public EventDetailResponse getEventDetail(BigInteger eventId) {
+        return eventRepository.findSimpleEventDetailById(eventId);
+    }
+
     @Transactional
     public Events createEvent(CreateEventRequest req) throws Exception {
         // 1. Organizer
@@ -88,7 +102,7 @@ public class EventService {
                 .map(TicketTypeDTO::getMetadataURI)
                 .collect(Collectors.toList());
 
-        // Gọi hàm createEvent trong contract 
+        // Gọi hàm createEvent trong contract
         TransactionReceipt receipt = eventContract.createEvent(
                 req.getOrganizer().getName(),
                 ticketPrices,

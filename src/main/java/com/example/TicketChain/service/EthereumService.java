@@ -1,7 +1,6 @@
 package com.example.TicketChain.service;
 
 import java.io.IOException;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 
