@@ -69,7 +69,7 @@ public class EventService {
     // }
 
     public EventDetailResponse getEventDetail(BigInteger eventId) {
-        return eventRepository.findSimpleEventDetailById(eventId);
+        return eventRepository.findEventDetailById(eventId);
     }
 
     @Transactional

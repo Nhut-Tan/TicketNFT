@@ -3,7 +3,7 @@ package com.example.TicketChain.core;
 public enum TicketStatus {
     OWNED("owned"),        // Đang thuộc sở hữu người dùng
     USED("used"),         // Đã sử dụng
-    BURN("burn");   // Đã huỷ
+    BURN("burn");   // Đã huỷ (vô hiệu hóa)
     private final String value;
 
     TicketStatus(String value) {

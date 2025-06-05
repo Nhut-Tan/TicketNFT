@@ -10,6 +10,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,11 +22,12 @@ import jakarta.persistence.Table;
 @Table(name = "tickets")
 public class Tickets {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger ticket_id;
     private String owner_address;
 
     @Column(unique = true)
-    private Integer token_id;
+    private BigInteger token_id;
 
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
@@ -42,8 +45,12 @@ public class Tickets {
     @OneToMany(mappedBy = "ticket")
     private List<OrderDetail> orderDetails;
 
-    @OneToMany(mappedBy = "ticket")
-    private List<Transactions> transactions;
+    @ManyToOne
+    @JoinColumn(name = "trans_id")
+    private Transactions transaction;
+
+    // @OneToMany(mappedBy = "ticket")
+    // private List<Transactions> transactions;
 
     public BigInteger getTicket_id() {
         return ticket_id;
@@ -61,11 +68,11 @@ public class Tickets {
         this.owner_address = owner_address;
     }
 
-    public Integer getToken_id() {
+    public BigInteger getToken_id() {
         return token_id;
     }
 
-    public void setToken_id(Integer token_id) {
+    public void setToken_id(BigInteger token_id) {
         this.token_id = token_id;
     }
 
@@ -117,12 +124,20 @@ public class Tickets {
         this.orderDetails = orderDetails;
     }
 
-    public List<Transactions> getTransactions() {
-        return transactions;
+    public Transactions getTransaction() {
+        return transaction;
     }
 
-    public void setTransactions(List<Transactions> transactions) {
-        this.transactions = transactions;
+    public void setTransaction(Transactions transaction) {
+        this.transaction = transaction;
     }
+
+    // public List<Transactions> getTransactions() {
+    // return transactions;
+    // }
+
+    // public void setTransactions(List<Transactions> transactions) {
+    // this.transactions = transactions;
+    // }
 
 }

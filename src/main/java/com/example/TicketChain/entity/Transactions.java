@@ -2,13 +2,16 @@ package com.example.TicketChain.entity;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,12 +24,22 @@ public class Transactions {
     private String tx_hash;
     private String from_address;
     private String to_address;
-    private Long token_id;
+    //private BigInteger token_id;
     private Timestamp transaction_date;
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Tickets ticket;
+    // @ManyToOne
+    // @JoinColumn(name = "ticket_id")
+    // private Tickets ticket;
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    private List<Tickets> tickets;
+
+    public List<Tickets> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Tickets> tickets) {
+        this.tickets = tickets;
+    }
 
     @ManyToOne
     @JoinColumn(name = "listing_id")
@@ -64,13 +77,13 @@ public class Transactions {
         this.to_address = to_address;
     }
 
-    public Long getToken_id() {
-        return token_id;
-    }
+    // public BigInteger getToken_id() {
+    //     return token_id;
+    // }
 
-    public void setToken_id(Long token_id) {
-        this.token_id = token_id;
-    }
+    // public void setToken_id(BigInteger token_id) {
+    //     this.token_id = token_id;
+    // }
 
     public Timestamp getTransaction_date() {
         return transaction_date;
@@ -80,13 +93,13 @@ public class Transactions {
         this.transaction_date = transaction_date;
     }
 
-    public Tickets getTicket() {
-        return ticket;
-    }
+    // public Tickets getTicket() {
+    // return ticket;
+    // }
 
-    public void setTicket(Tickets ticket) {
-        this.ticket = ticket;
-    }
+    // public void setTicket(Tickets ticket) {
+    // this.ticket = ticket;
+    // }
 
     public TicketListing getListing() {
         return listing;

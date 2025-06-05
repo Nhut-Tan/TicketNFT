@@ -29,7 +29,7 @@ public class OrderDetail {
     private Tickets ticket;
 
     @ManyToOne
-    @JoinColumn(name = "listing_id")
+    @JoinColumn(name = "listing_id", nullable = true)
     private TicketListing listing;
 
     public BigInteger getOrderdetail_id() {

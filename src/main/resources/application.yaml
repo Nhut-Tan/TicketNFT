@@ -7,6 +7,11 @@ spring:
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Ho_Chi_Minh
 web3j:
   client-address: https://sepolia.infura.io/v3/3d0b1ec030e3476c9c0da33258249774
   wallet:

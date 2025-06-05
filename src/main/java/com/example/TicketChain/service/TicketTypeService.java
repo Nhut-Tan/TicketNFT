@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.TicketChain.dto.request.TicketTypeDTO;
+
 import com.example.TicketChain.dto.response.TicketTypeResponse;
 import com.example.TicketChain.entity.TicketType;
 import com.example.TicketChain.repository.TicketTypeRepository;

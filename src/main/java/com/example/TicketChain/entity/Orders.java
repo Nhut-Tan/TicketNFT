@@ -26,7 +26,7 @@ public class Orders {
     private Boolean is_resale = false;
 
     @ManyToOne
-    @JoinColumn(name = "wallet_id")
+    @JoinColumn(name = "wallet_address")
     private Wallet wallet;
 
     @ManyToOne
