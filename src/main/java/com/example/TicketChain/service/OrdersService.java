@@ -1,6 +1,5 @@
 package com.example.TicketChain.service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +75,12 @@ public class OrdersService {
         for (OrderTicketDTO t : request.getTickets()) {
             TicketType type = ticketTypeRepository.findById(t.getTicketTypeId())
                     .orElseThrow(() -> new RuntimeException("TicketType not found"));
+            // Giảm vé khi bán ra
+            if (type.getRemaining_amount() <= 0) {
+                throw new RuntimeException("Loại vé " + type.getName() + " đã bán hết");
+            }
+            type.setRemaining_amount(type.getRemaining_amount() - 1);
+            ticketTypeRepository.save(type);
 
             Tickets ticket = new Tickets();
             ticket.setOwner_address(txDto.getToAddress());
