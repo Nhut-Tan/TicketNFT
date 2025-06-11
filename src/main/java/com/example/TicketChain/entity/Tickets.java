@@ -26,8 +26,8 @@ public class Tickets {
     private BigInteger ticket_id;
     private String owner_address;
 
-    @Column(unique = true)
-    private BigInteger token_id;
+    @Column(unique = true, name = "token_id")
+    private BigInteger tokenId;
 
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
@@ -69,11 +69,11 @@ public class Tickets {
     }
 
     public BigInteger getToken_id() {
-        return token_id;
+        return tokenId;
     }
 
     public void setToken_id(BigInteger token_id) {
-        this.token_id = token_id;
+        this.tokenId = token_id;
     }
 
     public TicketStatus getStatus() {
