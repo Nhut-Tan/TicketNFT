@@ -21,28 +21,26 @@ public class TicketService {
     }
 
     @PostConstruct
-    public void startListeningTicketTransferredEvents() {
-        ticketNFT.ticketTransferredEventFlowable(DefaultBlockParameterName.LATEST, DefaultBlockParameterName.LATEST)
+    public void listenToTransferEvents() {
+        ticketNFT.transferEventFlowable(DefaultBlockParameterName.LATEST, DefaultBlockParameterName.LATEST)
                 .subscribe(event -> {
                     BigInteger tokenId = event.tokenId;
-                    String newOwner = event.to;
                     String from = event.from;
+                    String to = event.to;
 
-                    System.out.println(
-                            "TicketTransferred event: TokenID " + tokenId + ", From: " + from + ", To: " + newOwner);
+                    System.out.println("Transfer Event detected: TokenId=" + tokenId + ", from=" + from + ", to=" + to);
 
-                    // Cập nhật vào database
                     ticketRepository.findByTokenId(tokenId)
                             .ifPresentOrElse(ticket -> {
-                                ticket.setOwner_address(newOwner);
+                                ticket.setOwner_address(to);
                                 ticketRepository.save(ticket);
-                                System.out.println("DB updated: TokenID " + tokenId + " -> newOwner: " + newOwner);
+                                System.out.println("NewOwner đã được cập nhật" + to);
                             }, () -> {
-                                System.err.println("Ticket with TokenID " + tokenId + " not found in DB");
+                                System.err.println("Không tìm thấy tokenId này" + tokenId);
                             });
 
                 }, error -> {
-                    System.err.println("Error listening TicketTransferred: " + error.getMessage());
+                    System.err.println("Lỗi khi listener event" + error.getMessage());
                 });
     }
 }
