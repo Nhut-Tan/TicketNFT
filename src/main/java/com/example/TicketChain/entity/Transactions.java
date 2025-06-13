@@ -109,4 +109,7 @@ public class Transactions {
         this.listing = listing;
     }
 
+    public Timestamp getCreated_at() {
+        return transaction_date;
+    }
 }
