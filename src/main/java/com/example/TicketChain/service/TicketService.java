@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.web3j.model.TicketNFT;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 
-import com.example.TicketChain.repository.TicketRepository;
 
 import jakarta.annotation.PostConstruct;
 

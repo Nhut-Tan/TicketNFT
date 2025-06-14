@@ -2,6 +2,7 @@ package com.example.TicketChain.dto.response;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import com.example.TicketChain.core.EventStatus; // Thêm import này
 
 public class EventDetailResponse {
     private BigInteger eventId;
@@ -13,9 +14,11 @@ public class EventDetailResponse {
     private Timestamp dateEnd;
     private String organizerName;
     private String logo;
+    private EventStatus status; // Thêm trường status
 
+    // Cập nhật constructor
     public EventDetailResponse(BigInteger eventId, String eventName, String location, String description,
-            String imageUrl, Timestamp dateStart, Timestamp dateEnd, String organizerName, String logo) {
+                               String imageUrl, Timestamp dateStart, Timestamp dateEnd, String organizerName, String logo, EventStatus status) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.location = location;
@@ -25,8 +28,19 @@ public class EventDetailResponse {
         this.dateEnd = dateEnd;
         this.organizerName = organizerName;
         this.logo = logo;
+        this.status = status; // Thêm status vào constructor
     }
 
+    // Getter và Setter cho status
+    public EventStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
+    }
+
+    // Các getter/setter khác giữ nguyên
     public BigInteger getEventId() {
         return eventId;
     }

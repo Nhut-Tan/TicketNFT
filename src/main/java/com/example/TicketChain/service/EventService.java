@@ -1,5 +1,6 @@
 package com.example.TicketChain.service;
 
+import com.example.TicketChain.dto.request.EventSearchRequest;
 import org.web3j.utils.Convert;
 import java.math.BigInteger;
 
@@ -155,6 +156,17 @@ public class EventService {
         }
 
         return event;
+    }
+    public List<EventDetailResponse> searchEvents(EventSearchRequest searchRequest) {
+        return eventRepository.searchEvents(
+                searchRequest.getKeyword(),
+                searchRequest.getDateStart(),
+                searchRequest.getDateEnd(),
+                searchRequest.getStatus(),
+                searchRequest.getOrganizerName());
+    }
+    public List<String> getSuggestions(String keyword) {
+        return eventRepository.findSuggestions(keyword);
     }
 
 }
