@@ -28,12 +28,12 @@ public interface EventRepository extends JpaRepository<Events, BigInteger> {
         // EventDetailResponse findEventDetailById(@Param("eventId") BigInteger
         // eventId);
         @Query("""
-            SELECT new com.example.TicketChain.dto.response.EventDetailResponse(
-                e.eventId, e.eventName, e.location, e.description, e.imageUrl, 
-                e.dateStart, e.dateEnd, o.name, o.logo, e.status)
-            FROM Events e JOIN e.organizer o
-            WHERE e.eventId = :eventId
-            """)
+        SELECT new com.example.TicketChain.dto.response.EventDetailResponse(
+            e.eventId, e.eventName, e.location, e.description, e.imageUrl, 
+            e.dateStart, e.dateEnd, o.name, o.logo, o.description, e.status)
+        FROM Events e JOIN e.organizer o
+        WHERE e.eventId = :eventId
+        """)
         EventDetailResponse findEventDetailById(@Param("eventId") BigInteger eventId);
 
         @Modifying
@@ -44,7 +44,7 @@ public interface EventRepository extends JpaRepository<Events, BigInteger> {
         @Query("""
         SELECT new com.example.TicketChain.dto.response.EventDetailResponse(
             e.eventId, e.eventName, e.location, e.description, e.imageUrl, 
-            e.dateStart, e.dateEnd, o.name, o.logo, e.status)
+            e.dateStart, e.dateEnd, o.name, o.logo, o.description, e.status)
         FROM Events e JOIN e.organizer o
         WHERE (:keyword IS NULL OR LOWER(e.eventName) LIKE LOWER(CONCAT('%', :keyword, '%')) 
             OR LOWER(e.description) LIKE LOWER(CONCAT('%', :keyword, '%')) 
@@ -67,6 +67,7 @@ public interface EventRepository extends JpaRepository<Events, BigInteger> {
         WHERE LOWER(e.eventName) LIKE LOWER(CONCAT('%', :keyword, '%'))
            OR LOWER(e.location) LIKE LOWER(CONCAT('%', :keyword, '%'))
            OR LOWER(o.name) LIKE LOWER(CONCAT('%', :keyword, '%'))
+           OR LOWER(o.description) LIKE LOWER(CONCAT('%', :keyword, '%'))
         ORDER BY e.eventName
         """)
         List<String> findSuggestions(@Param("keyword") String keyword);
